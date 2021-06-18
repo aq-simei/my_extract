@@ -1,11 +1,39 @@
-import styled from 'styled-components'
-//Ao utilizar styled components, as propriedades são dadas a um componente (letra maiúscula e aspas duplas `estilo`)
-const Title = styled.h1`
-`
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import { GlobalStyle } from './Styles/global';
+import { Header } from './components/Header';
+import { Dashboard } from './components/Dashboard';
+import { useState } from 'react';
+import { NewTransactionModal } from './NewTransactionModal';
+
+Modal.setAppElement('#root');
+
+
 export function App() {
+  
+  const [ isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+
+  function handleOpenNewTransactionModal(){
+      setIsNewTransactionModalOpen(true);
+  }
+
+  function handleCloseNewTransactionModal(){
+          setIsNewTransactionModalOpen(false);
+      }
+
   return (
-    <div className="App">
-      <Title>Hello World</Title>
-    </div>
-  ); //ao usar styled-components, a tag html muda: styled.h1 -> tag no código html recebe o nome do componente, nesse caso, Title
+    <>
+      <Header 
+      onOpenNewTransactionModal = {handleOpenNewTransactionModal} 
+      />
+      <NewTransactionModal 
+      isOpen = {isNewTransactionModalOpen} 
+      onRequestClose = {handleCloseNewTransactionModal}
+      />
+      <Dashboard />
+
+      <GlobalStyle />
+    </>
+  );
 }
+// <GlobalStyle/> is a self-closing tag
