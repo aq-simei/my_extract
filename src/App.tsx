@@ -1,10 +1,10 @@
 import Modal from 'react-modal';
-import styled from 'styled-components';
 import { GlobalStyle } from './Styles/global';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { useState } from 'react';
 import { NewTransactionModal } from './NewTransactionModal';
+import {TransactionsProvider } from './Hooks/useTransactions';
 
 Modal.setAppElement('#root');
 
@@ -22,18 +22,17 @@ export function App() {
       }
 
   return (
-    <>
+    <TransactionsProvider>
       <Header 
       onOpenNewTransactionModal = {handleOpenNewTransactionModal} 
       />
-      <NewTransactionModal 
+      <Dashboard />
+      <NewTransactionModal
       isOpen = {isNewTransactionModalOpen} 
       onRequestClose = {handleCloseNewTransactionModal}
       />
-      <Dashboard />
-
       <GlobalStyle />
-    </>
+    </TransactionsProvider>
   );
 }
 // <GlobalStyle/> is a self-closing tag

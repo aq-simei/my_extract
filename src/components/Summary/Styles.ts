@@ -18,9 +18,10 @@ export const Container = styled.div`
        justify-content: space-between;
     }
     strong{
+        font-family: "Poppins";
         margin-top: 1rem;
         font-size: 2rem;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 3rem;
         display:block;
 
